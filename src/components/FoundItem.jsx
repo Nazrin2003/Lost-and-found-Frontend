@@ -8,38 +8,49 @@ const FoundItems = () => {
     description: '',
     foundDate: '',
     location: '',
-    imageUrl: '',
+    imageUrl: null,
     reporterName: '',
     contact: ''
   })
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+  const { name, value, files } = e.target;
+  if (name === 'image') {
+    setFormData({ ...formData, image: files[0] });
+  } else {
+    setFormData({ ...formData, [name]: value });
   }
+}
+
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post('http://localhost:4000/add', formData);
-      alert('Item submitted successfully!');
-      console.log(res.data)
-      setFormData({
-        itemName: '',
-        description: '',
-        foundDate: '',
-        location: '',
-        imageUrl: '',
-        reporterName: '',
-        contact: ''
-      });
-    } catch (err) {
-      console.error('Error submitting item:', err)
-      alert('Failed to submit item.')
-    }
+  e.preventDefault();
+  const data = new FormData();
+  for (const key in formData) {
+    data.append(key, formData[key]);
   }
+
+  try {
+    const res = await axios.post('http://localhost:4000/add', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    alert('Item submitted successfully!');
+    setFormData({
+      itemName: '',
+      description: '',
+      foundDate: '',
+      location: '',
+      image: null,
+      reporterName: '',
+      contact: ''
+    });
+  } catch (err) {
+    console.error('Error submitting item:', err);
+    alert('Failed to submit item.');
+  }
+}
 
   return (
     <div
@@ -62,7 +73,7 @@ const FoundItems = () => {
           boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)',
         }}
       >
-        <h2 className="mb-4 text-center text-danger">REPORT A FOUND ITEM</h2>
+        <h2 className="mb-4 text-center text-danger">📌 REPORT A FOUND ITEM</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label className="form-label fw-semibold">Item Name</label>
@@ -86,7 +97,8 @@ const FoundItems = () => {
 
           <div className="mb-3">
             <label className="form-label fw-semibold">Image URL (optional)</label>
-            <input type="file" className="form-control" name="imageUrl" value={formData.imageUrl} onChange={handleChange} />
+            <input type="file" className="form-control" name="image" onChange={handleChange}/>
+
           </div>
 
           <div className="mb-3">

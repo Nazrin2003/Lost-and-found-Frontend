@@ -38,7 +38,7 @@ const SearchItem = () => {
           paddingTop: '60px'
         }}
       >
-        <center><h2 style={{ color: "#dc3545", fontWeight: "bold" }}>SEARCH ITEMS</h2></center>
+        <center><h2 style={{ color: "#dc3545", fontWeight: "bold" }}>🔍 SEARCH ITEMS</h2></center>
 
         <div className="row g-4 px-3 py-3">
           <div className="col-12">
@@ -61,34 +61,39 @@ const SearchItem = () => {
           </div>
 
           {/* Display search results */}
-         {results.map((item, index) => (
-  <div key={index} className="card mb-4 shadow-sm border-0">
-    <div className="row g-0">
-      <div className="col-md-4 d-flex align-items-center justify-content-center p-2">
-        {item.imageUrl ? (
-          <img
-            src={item.imageUrl}
-            alt="Found item"
-            className="img-fluid rounded"
-            style={{ maxHeight: "180px", maxWidth: "100%", objectFit: "cover" }}
-          />
-        ) : (
-          <div className="text-muted">No Image</div>
-        )}
-      </div>
-      <div className="col-md-8">
-        <div className="card-body">
-          <h5 className="card-title fw-bold text-primary">{item.itemName}</h5>
-          <p className="card-text mb-1"><strong>Description:</strong> {item.description}</p>
-          <p className="card-text mb-1"><strong>Found Date:</strong> {item.foundDate}</p>
-          <p className="card-text mb-1"><strong>Location:</strong> {item.location}</p>
-          <p className="card-text mb-2"><strong>Reporter:</strong> {item.reporterName} - {item.contact}</p>
-          <button className="btn btn-outline-success btn-sm">Claim Item</button>
-        </div>
-      </div>
-    </div>
-  </div>
-))}
+          {results.map((item, index) => (
+            <div key={index} className="card mb-4 shadow-sm border-0">
+              <div className="row g-0">
+                <div className="col-md-4 d-flex align-items-center justify-content-center p-2">
+                  {item.imageUrl ? (
+                    <img
+                      src={`http://localhost:4000${item.imageUrl}` || "https://via.placeholder.com/300x200?text=No+Image"}
+                      alt="Found item"
+                      className="img-fluid rounded"
+                      style={{ maxHeight: "180px", maxWidth: "100%", objectFit: "cover" }}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://via.placeholder.com/150";
+                      }}
+                    />
+
+                  ) : (
+                    <div className="text-muted">No Image</div>
+                  )}
+                </div>
+                <div className="col-md-8">
+                  <div className="card-body">
+                    <h5 className="card-title fw-bold text-primary">{item.itemName}</h5>
+                    <p className="card-text mb-1"><strong>Description:</strong> {item.description}</p>
+                    <p className="card-text mb-1"><strong>Found Date:</strong> {item.foundDate}</p>
+                    <p className="card-text mb-1"><strong>Location:</strong> {item.location}</p>
+                    <p className="card-text mb-2"><strong>Reporter:</strong> {item.reporterName} - {item.contact}</p>
+                    <button className="btn btn-outline-success btn-sm">Claim Item</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
 
         </div>
       </div>

@@ -26,7 +26,7 @@ const ViewItems = () => {
                 <div className="row g-0">
                   <div className="col-md-4">
                     <img
-                      src={item.imageUrl || "https://via.placeholder.com/300x200?text=No+Image"}
+                      src={`http://localhost:4000${item.imageUrl}` || "https://via.placeholder.com/300x200?text=No+Image"}
                       className="img-fluid rounded-start"
                       alt={item.itemName}
                       onError={(e) => {
@@ -34,6 +34,7 @@ const ViewItems = () => {
                         e.target.src = "https://via.placeholder.com/150";
                       }}
                     />
+
                   </div>
                   <div className="col-md-8">
                     <div className="card-body">

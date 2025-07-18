@@ -134,7 +134,7 @@ const Home = () => {
                 <p className="card-text">
                   Submit details about any item you found to help its owner retrieve it.
                 </p>
-                <a href="/found" className="btn btn-primary">Report Now</a>
+                <a href="/add" className="btn btn-primary">Report Now</a>
               </div>
             </div>
           </div>

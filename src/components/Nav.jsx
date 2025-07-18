@@ -11,13 +11,11 @@ const Nav = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
+            <div className="navbar-nav ms-auto">
               <Link className="nav-link" to="/">Home</Link>
               <Link className="nav-link" to="/add">Report Found Item</Link>
               <Link className="nav-link" to="/search">Search Lost Item</Link>
               <Link className="nav-link" to="/view">View Found Item</Link>
-
-
             </div>
           </div>
         </div>

@@ -61,23 +61,35 @@ const SearchItem = () => {
           </div>
 
           {/* Display search results */}
-          {results.length > 0 && (
-            <div className="col-12 mt-4">
-              <h5>Results:</h5>
-              {results.map((item, index) => (
-                <div key={index} className="card mb-3">
-                  <div className="card-body">
-                    <h5 className="card-title">{item.itemName}</h5>
-                    <p className="card-text"><strong>Description:</strong> {item.description}</p>
-                    <p className="card-text"><strong>Found Date:</strong> {item.foundDate}</p>
-                    <p className="card-text"><strong>Location:</strong> {item.location}</p>
-                    <p className="card-text"><strong>Reporter:</strong> {item.reporterName} - {item.contact}</p>
-                    {item.imageUrl && <img src={item.imageUrl} alt="Found item" className="img-fluid" style={{ maxHeight: "200px" }} />}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+         {results.map((item, index) => (
+  <div key={index} className="card mb-4 shadow-sm border-0">
+    <div className="row g-0">
+      <div className="col-md-4 d-flex align-items-center justify-content-center p-2">
+        {item.imageUrl ? (
+          <img
+            src={item.imageUrl}
+            alt="Found item"
+            className="img-fluid rounded"
+            style={{ maxHeight: "180px", maxWidth: "100%", objectFit: "cover" }}
+          />
+        ) : (
+          <div className="text-muted">No Image</div>
+        )}
+      </div>
+      <div className="col-md-8">
+        <div className="card-body">
+          <h5 className="card-title fw-bold text-primary">{item.itemName}</h5>
+          <p className="card-text mb-1"><strong>Description:</strong> {item.description}</p>
+          <p className="card-text mb-1"><strong>Found Date:</strong> {item.foundDate}</p>
+          <p className="card-text mb-1"><strong>Location:</strong> {item.location}</p>
+          <p className="card-text mb-2"><strong>Reporter:</strong> {item.reporterName} - {item.contact}</p>
+          <button className="btn btn-outline-success btn-sm">Claim Item</button>
+        </div>
+      </div>
+    </div>
+  </div>
+))}
+
         </div>
       </div>
     </div>

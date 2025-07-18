@@ -11,21 +11,21 @@ const FoundItems = () => {
     imageUrl: '',
     reporterName: '',
     contact: ''
-  });
+  })
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post('http://localhost:4000/add', formData);
       alert('Item submitted successfully!');
-      console.log(res.data);
+      console.log(res.data)
       setFormData({
         itemName: '',
         description: '',
@@ -36,10 +36,10 @@ const FoundItems = () => {
         contact: ''
       });
     } catch (err) {
-      console.error('Error submitting item:', err);
-      alert('Failed to submit item.');
+      console.error('Error submitting item:', err)
+      alert('Failed to submit item.')
     }
-  };
+  }
 
   return (
     <div
@@ -86,7 +86,7 @@ const FoundItems = () => {
 
           <div className="mb-3">
             <label className="form-label fw-semibold">Image URL (optional)</label>
-            <input type="text" className="form-control" name="imageUrl" value={formData.imageUrl} onChange={handleChange} />
+            <input type="file" className="form-control" name="imageUrl" value={formData.imageUrl} onChange={handleChange} />
           </div>
 
           <div className="mb-3">
